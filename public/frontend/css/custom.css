@@ -1,0 +1,57 @@
+.bpsapce{
+  margin: 8px 0px;
+}
+
+
+.sign-out {
+     background: #28a745;
+    color: #fff;
+    margin: 0px 10px 8px;
+    border: 0px;
+    position: absolute;
+    right: 5px;
+    float: right;
+}
+
+.navbar-img {
+    /*height: calc(3.5rem + 1px)/2;*/
+    width: 120px;
+}
+
+.edit-profile {
+    background: #17a2b8;
+    color: #fff;
+    margin: 0px 10px 8px;
+    border: 0px;
+}
+
+.edit-profile:hover{
+        color: #fff;
+    text-decoration: none;
+}
+
+.display-img {
+    width: 60px;
+}
+
+.card-space {
+    margin-left: 5px;
+    margin-right: 30px;
+}
+
+.details-image {
+    width: 600px;
+    padding-left: 15px;
+    padding-bottom: 1px;
+}
+.feture-style {
+    padding: 30px;
+}
+
+.header-style {
+    margin: 5px;
+}
+
+.content-style {
+    padding: 30px;
+}

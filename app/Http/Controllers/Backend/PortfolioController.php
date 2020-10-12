@@ -42,7 +42,7 @@ class PortfolioController extends Controller
                         ->select(
                             'id',
                             'project_title',
-                            'thumbnail',
+                            'thumbnail'
                             )
                 ->get();
 
@@ -474,24 +474,28 @@ class PortfolioController extends Controller
      */
 
 
-       public function updateBanner(Request $request)
+       public function updateBanner(Request $request,$id)
     {
           $request->validate([
             'title'  => 'required|max:100',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'cv_upload.mimes' => 'Only PDF, doc, docx and pptx files are allowed to upload !'
         ]);
 
         try {
             DB::beginTransaction();
-            $banner= new Banner();
+            $banner= Banner::find($id);
             $banner->title=$request->title;
             $banner->name=$request->name;
              if ($request->image) {
-                $banner->image = UploadHelper::update('image', $request->image,$request->name.'-' .'image-banner-'. time(), 'public/backend/images/banner',$banner->image );
+                UploadHelper::deleteFile('public/backend/images/banner/'.$banner->image );
+                $banner->image = UploadHelper::update('image', $request->image,'image-banner-'. time(), 'public/backend/images/banner',$banner->image );
+
+
             }
 
             if ($request->cv_upload) {
+              UploadHelper::deleteFile('public/backend/images/cv/'.$banner->cv_upload );
                 $banner->cv_upload = UploadHelper::update('cv_upload', $request->cv_upload,$request->name. '-' .'CV-UPLOAD-'. time(), 'public/backend/images/cv',$banner->cv_upload);
             }
             $banner->description=$request->description;

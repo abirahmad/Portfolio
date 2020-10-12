@@ -8,7 +8,7 @@
     <script src="{{asset('public/frontend/js/imagesloaded.pkgd.js')}}"></script>
     <script src="{{asset('public/frontend/js/jquery.mCustomScrollbar.concat.min.js')}}"></script>
     <script src="{{asset('public/frontend/js/jQuery-Circle-progressbar.js')}}"></script>
-    <script src="{{asset('public/frontend/js/slick.min.js')}}"></script>
+    <!-- <script src="{{asset('public/frontend/js/slick.min.js')}}"></script> -->
     <script src="{{asset('public/frontend/js/script.js')}}"></script>
     <!-- =====>> End Jquery <<===== 
     =========================== -->

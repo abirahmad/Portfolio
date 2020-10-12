@@ -32,8 +32,9 @@
 					
 						<!-- /.card-header -->
 						<!-- form start -->
-						<form action="{{route('admin.banners.update')}}" method="POST" enctype="multipart/form-data" role="form" id="submit-form">
+						<form action="{{route('admin.banners.updateBanner',$banners->id)}}" method="POST" enctype="multipart/form-data" role="form" id="submit-form">
 							@csrf
+              @method('post')
                 		@include('backend.layouts.partials.messages')
 						<div class="card-body row">
 							<div class="col-md-12">
@@ -73,7 +74,7 @@
 							<!-- /.card-body -->
 
 							<div class="card-footer">
-								<a class="btn btn-primary" href="{{ route('admin.banners.update') }}"
+								<a class="btn btn-primary" href="{{ route('admin.banners.updateBanner',$banners->id) }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('submit-form').submit();">Submit</a>
 							</div>

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\User;
+use App\Models\Count;
 
 class PagesController extends Controller
 {
@@ -28,8 +29,9 @@ class PagesController extends Controller
     public function index()
     {
         $user = Auth::user();
+        $count=Count::first();
 
-        return view('backend.index',compact('user'));
+        return view('backend.index',compact('user','count'));
     }
 
     /**

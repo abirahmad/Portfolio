@@ -9,14 +9,17 @@ use App\Models\Track;
 use App\Models\Count;
 use App\Models\Menu;
 use App\Models\Portfolio;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\PortfolioEmail;
 
 class PortfolioHomeController extends Controller
 {
 
-    public function __construct(){
-        $count=Count::first();
-        $views=$count->view;
-        $ip_address=request()->ip();
+    public function __construct()
+    {
+        $count = Count::first();
+        $views = $count->view;
+        $ip_address = request()->ip();
         // $MAC = exec('getmac');
         // $MAC = strtok($MAC, ' '); 
         // dd($MAC);
@@ -31,20 +34,25 @@ class PortfolioHomeController extends Controller
      */
     public function index()
     {
-        $menus=Menu::orderBy('id','desc')->get();
+        $menus = Menu::orderBy('id', 'desc')->get();
 
-            $portfolios=Portfolio::orderBY('id','desc')
-                            // ->where('menu_id',$id)
-                            ->select('id','project_title','thumbnail','menu_id')
-                            ->get();
+        //Share Count
+        $count = Count::first();
+        $shares = $count->shares;
+        Count::newCountShare($shares);
+
+
+        $portfolios = Portfolio::orderBY('id', 'desc')
+            // ->where('menu_id',$id)
+            ->select('id', 'project_title', 'thumbnail', 'menu_id')
+            ->get();
         // dd($portfolios);
-        $user=User::first();
-        if($user->theme_id == 1){
-            return view('frontend.index',compact('menus','portfolios'));
-        }else{
-            return view('frontend.index_dark',compact('menus','portfolios'));
+        $user = User::first();
+        if ($user->theme_id == 1) {
+            return view('frontend.index', compact('menus', 'portfolios'));
+        } else {
+            return view('frontend.index_dark', compact('menus', 'portfolios'));
         }
-        
     }
 
     /**
@@ -63,9 +71,21 @@ class PortfolioHomeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
-        //
+        // dd(request()->all());
+        // $data = request()->validate([
+        //     'name' => 'required',
+        //     'number' => 'required',
+        //     'email' => 'required',
+        //     'subject' => 'required',
+        //     'message' => 'required',
+        // ]);
+
+        $data = request()->all();
+        //sending mail
+
+        Mail::to('test@test.com')->send(new PortfolioEmail($data));
     }
 
     /**
@@ -76,14 +96,14 @@ class PortfolioHomeController extends Controller
      */
     public function show($id)
     {
-        $portfolio_details=Portfolio::find($id);
-        $user=User::first();
+        $portfolio_details = Portfolio::find($id);
+        $user = User::first();
 
-        if(!is_null($portfolio_details)){
-            if($user->theme_id=1){
-                return view('frontend.show_light',compact('portfolio_details','user'));
-            }else{
-                return view('frontend.show_dark',compact('portfolio_details','user'));
+        if (!is_null($portfolio_details)) {
+            if ($user->theme_id = 1) {
+                return view('frontend.show_light', compact('portfolio_details', 'user'));
+            } else {
+                return view('frontend.show_dark', compact('portfolio_details', 'user'));
             }
         }
     }

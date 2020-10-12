@@ -4,9 +4,20 @@
 Portfolio
 @endsection
 
+@section('meta_tag')
+<meta property="og:url" content="{{ route('index') }}" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Portfolio" />
+<meta property="og:description" content="My Portfolio| Not huge but quite useful" />
+<meta property="og:image" content="{{ asset('public/frontend/images/share_pics/share_photo.png') }}" />
+@endsection
+
 @section('content')
 <!-- =====>> Hero Home2 <<===== 
     =========================== -->
+
+   <span>Share on: </span>
+                <a href="https://www.facebook.com/sharer/sharer.php?u={{ route('index') }}" class="btn btn-primary btn-sm pl-3 pr-3" target="_blank">Facebook</a>
 
         <?php 
 
@@ -547,8 +558,8 @@ Portfolio
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-12 col-sm-12 mt-30">
-                    <form action="mail.php" method="POST" class="contact-box2" id="contact-form">
-
+                    <form action="{{route('store')}}" method="POST" class="contact-box2" id="contact-form">
+                        @csrf
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="input-box2 mb-30">
@@ -576,7 +587,7 @@ Portfolio
                             </div>
                             <div class="col-lg-6">
                                 <div class="input-box2 mb-30">
-                                    <input type="text" name="Subject" autocomplete="off" required>
+                                    <input type="text" name="subject" autocomplete="off" required>
                                     <label for="name" class="label-name2">
                                         <span class="label-content2">Subject</span>
                                     </label>
@@ -584,7 +595,7 @@ Portfolio
                             </div>
                             <div class="col-lg-12">
                                 <div class="input-box2 textarea-area2 mb-30">
-                                    <textarea name="massage" id="name" autocomplete="off" required></textarea>
+                                    <textarea name="message" id="name" autocomplete="off" required></textarea>
                                     <label for="name" class="label-name2">
                                         <span class="label-content2">Messages</span>
                                     </label>

@@ -30,4 +30,19 @@ class Count extends Model
         $count->save();
 
     }
+
+      /**
+     * newTrack
+     *
+     * @param string $title
+     * @param string $description
+     * @return void Create new track entry after any action
+     */
+    public static function newCountShare($shares)
+    {
+        $count = Count::first();
+        $count->shares = $shares+1;
+        $count->save();
+
+    }
 }

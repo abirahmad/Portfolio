@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{$user->fullname}}</title>
    	@include('frontend.layouts_light.styles')
+    @yield('meta_tag')
 </head>
 
 <body>

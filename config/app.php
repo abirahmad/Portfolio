@@ -165,7 +165,7 @@ return [
          * Package Service Providers...
          */
 
-        Yajra\DataTables\DataTablesServiceProvider::class,
+        // Yajra\DataTables\DataTablesServiceProvider::class,
         // Spatie\Permission\PermissionServiceProvider::class,
 
         /*

@@ -18,14 +18,14 @@ class PortfolioHomeController extends Controller
     public function __construct()
     {
         $count = Count::first();
-        $views = $count->view;
+        // $views = $count->view;
         $ip_address = request()->ip();
         // $MAC = exec('getmac');
         // $MAC = strtok($MAC, ' '); 
         // dd($MAC);
 
         Track::newTrack($ip_address);
-        Count::newCount($views);
+        // Count::newCount($views);
     }
     /**
      * Display a listing of the resource.
@@ -37,9 +37,9 @@ class PortfolioHomeController extends Controller
         $menus = Menu::orderBy('id', 'desc')->get();
 
         //Share Count
-        $count = Count::first();
-        $shares = $count->shares;
-        Count::newCountShare($shares);
+        // $count = Count::first();
+        // $shares = $count->shares;
+        // Count::newCountShare($shares);
 
 
         $portfolios = Portfolio::orderBY('id', 'desc')
